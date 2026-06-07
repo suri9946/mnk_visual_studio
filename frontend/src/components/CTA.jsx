@@ -52,24 +52,24 @@ const CTA = () => {
                         <svg width="40" height="40" viewBox="0 0 24 24" fill="#7B2FF7">
                             <path d="M2 12L22 2L12 22L11 13L2 12Z" />
                         </svg>
-                        {/* Kite tail — explicit-sized SVG avoids overflow-hidden clipping from section.
-                             Plane bottom vertex (12,22) in 24x24 viewBox at 40x40 = screen (20px, 37px).
-                             SVG at top:37 left:7 → path start (13,0) = screen (7+13=20, 37+0=37) ✅
-                             All path points inside 26×70 bounds → no overflow → no clipping. */}
+                        {/* Kite tail — trails LEFT behind the plane (plane flies upper-right, tail goes lower-left).
+                             Plane tail vertex (2,12) in 24x24 @ 40x40 = screen (3px, 20px).
+                             SVG top:12 left:-65 width:68 → path end (68,8) = screen (-65+68=3, 12+8=20) ✅
+                             All points within 68×20 viewBox → no overflow → no clipping. */}
                         <svg
                             style={{
                                 position: 'absolute',
-                                top: '37px',
-                                left: '7px',
-                                width: '26px',
-                                height: '70px',
+                                top: '12px',
+                                left: '-65px',
+                                width: '68px',
+                                height: '20px',
                                 pointerEvents: 'none',
                             }}
-                            viewBox="0 0 26 70"
+                            viewBox="0 0 68 20"
                             fill="none"
                         >
                             <path
-                                d="M13 0 Q 0 17 13 34 Q 26 51 11 68"
+                                d="M68 8 Q 52 2 36 10 Q 20 18 0 14"
                                 stroke="#3B0764"
                                 strokeWidth="2.8"
                                 strokeLinecap="round"
