@@ -1,5 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import brandIdentityImage from '../assets/portfolio/brand-identity.png';
+import reelsProductionImage from '../assets/portfolio/reels-production.png';
+import socialCampaignImage from '../assets/portfolio/social-campaign.png';
+import motionGraphicsImage from '../assets/portfolio/motion-graphics.png';
+import metaAdCreativesImage from '../assets/portfolio/meta-ad-creatives.png';
+import visualBrandingImage from '../assets/portfolio/visual-branding.png';
 
 const projects = [
     {
@@ -7,36 +13,42 @@ const projects = [
         category: 'Branding',
         bg: 'bg-purple-100',
         text: 'text-purple-800',
+        image: brandIdentityImage,
     },
     {
         title: 'Reels Production',
         category: 'Video',
         bg: 'bg-pink-100',
         text: 'text-pink-800',
+        image: reelsProductionImage,
     },
     {
         title: 'Social Campaign',
         category: 'Social Media',
         bg: 'bg-blue-100',
         text: 'text-blue-800',
+        image: socialCampaignImage,
     },
     {
         title: 'Motion Graphics',
         category: 'Motion',
         bg: 'bg-indigo-100',
         text: 'text-indigo-800',
+        image: motionGraphicsImage,
     },
     {
         title: 'Meta Ad Creatives',
         category: 'Meta Ads',
         bg: 'bg-teal-100',
         text: 'text-teal-800',
+        image: metaAdCreativesImage,
     },
     {
         title: 'Visual Branding',
         category: 'Branding',
         bg: 'bg-purple-100',
         text: 'text-purple-800',
+        image: visualBrandingImage,
     },
 ];
 
@@ -67,13 +79,19 @@ const Portfolio = () => {
                             whileHover={{ y: -5 }}
                             className="group relative rounded-3xl overflow-hidden cursor-pointer h-64 bg-gray-50 border border-gray-100 shadow-sm hover:shadow-lg transition-all duration-300"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-50 opacity-50 group-hover:opacity-100 transition-opacity" />
+                            <img
+                                src={project.image}
+                                alt={`${project.title} portfolio preview`}
+                                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
                             
                             <div className="absolute inset-0 p-7 flex flex-col justify-end z-10">
                                 <span className={`inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 w-fit ${project.bg} ${project.text}`}>
                                     {project.category}
                                 </span>
-                                <h3 className="text-xl font-bold text-dark group-hover:text-primary transition-colors">{project.title}</h3>
+                                <h3 className="text-xl font-bold text-white drop-shadow-sm">{project.title}</h3>
                             </div>
                         </motion.div>
                     ))}

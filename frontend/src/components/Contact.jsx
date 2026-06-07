@@ -49,9 +49,9 @@ const Contact = () => {
                 setStatus('error');
                 setMessage(response.data.message);
             }
-        } catch {
+        } catch (error) {
             setStatus('error');
-            setMessage('Something went wrong. Please try again.');
+            setMessage(error.response?.data?.message || 'Something went wrong. Please try again.');
         }
     };
 

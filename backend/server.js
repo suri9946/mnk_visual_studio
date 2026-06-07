@@ -7,9 +7,19 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+const OWNER_EMAIL = process.env.RECIPIENT_EMAIL || process.env.EMAIL_USER;
+const EMAIL_PASS = (process.env.EMAIL_PASS || '').replace(/\s/g, '');
+const isPlaceholder = (value = '') => value.includes('your_') || value.includes('your@');
 
 app.use(cors());
 app.use(express.json());
+
+const escapeHtml = (value = '') => String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 
 // API Routes
 app.get('/api/services', (req, res) => {
@@ -64,6 +74,17 @@ app.post('/api/contact', async (req, res) => {
         return res.status(400).json({ success: false, message: "Please fill in all required fields." });
     }
 
+    if (
+        !process.env.EMAIL_USER ||
+        !EMAIL_PASS ||
+        !OWNER_EMAIL ||
+        isPlaceholder(process.env.EMAIL_USER) ||
+        isPlaceholder(EMAIL_PASS)
+    ) {
+        console.error("Missing email configuration. Set EMAIL_USER, EMAIL_PASS, and RECIPIENT_EMAIL in backend/.env.");
+        return res.status(500).json({ success: false, message: "Email is not configured yet. Please contact us directly." });
+    }
+
     try {
         // Log to console as well
         console.log("Contact Form Submission:", { name, email, phone, service, message });
@@ -73,24 +94,25 @@ app.post('/api/contact', async (req, res) => {
             service: 'gmail', // Assuming you're using Gmail
             auth: {
                 user: process.env.EMAIL_USER, 
-                pass: process.env.EMAIL_PASS
+                pass: EMAIL_PASS
             }
         });
 
         // Email options
         const mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: 'hellomnkvisualhouse@gmail.com', // Where you want to receive the leads
-            subject: `New Lead: ${service} Inquiry from ${name}`,
+            from: `"MNK Visual House Website" <${process.env.EMAIL_USER}>`,
+            to: OWNER_EMAIL,
+            replyTo: email,
+            subject: `New Lead: ${service || 'Website'} Inquiry from ${name}`,
             html: `
                 <h2>New Website Inquiry</h2>
-                <p><strong>Name:</strong> ${name}</p>
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-                <p><strong>Interested Service:</strong> ${service || 'Not specified'}</p>
+                <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+                <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+                <p><strong>Phone:</strong> ${escapeHtml(phone || 'Not provided')}</p>
+                <p><strong>Interested Service:</strong> ${escapeHtml(service || 'Not specified')}</p>
                 <br/>
                 <p><strong>Message:</strong></p>
-                <p>${message}</p>
+                <p>${escapeHtml(message).replace(/\n/g, '<br/>')}</p>
             `
         };
 

@@ -63,6 +63,15 @@ const WhyUs = () => {
                         className="absolute bottom-40 left-1/2 -translate-x-[40%] z-20"
                     >
                         <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            {/* Exhaust flame */}
+                            <motion.g
+                                animate={{ scaleY: [1, 1.3, 1], opacity: [0.85, 1, 0.85] }}
+                                transition={{ duration: 0.3, repeat: Infinity, ease: "linear" }}
+                                style={{ transformOrigin: '50px 80px' }}
+                            >
+                                <path d="M42 78 C 38 86, 34 94, 50 100 C 66 94, 62 86, 58 78 Z" fill="#FF9D00" />
+                                <path d="M46 78 C 43 84, 41 91, 50 96 C 59 91, 57 84, 54 78 Z" fill="#FFD700" />
+                            </motion.g>
                             {/* Rocket Body */}
                             <path d="M50 10 C 65 25, 70 50, 65 70 C 50 75, 35 70, 35 70 C 30 50, 35 25, 50 10 Z" fill="#ffffff" stroke="#1A1A2E" strokeWidth="3" />
                             {/* Window */}
@@ -75,18 +84,6 @@ const WhyUs = () => {
                             {/* Engine */}
                             <path d="M42 70 L 45 80 L 55 80 L 58 70 Z" fill="#F5F5FA" stroke="#1A1A2E" strokeWidth="3" />
                         </svg>
-
-                        {/* Exhaust flame */}
-                        <motion.div 
-                            animate={{ scaleY: [1, 1.4, 1], opacity: [0.8, 1, 0.8] }}
-                            transition={{ duration: 0.3, repeat: Infinity, ease: "linear" }}
-                            className="absolute top-[80px] left-[55px] -translate-x-1/2 w-8 h-16 origin-top z-10"
-                        >
-                            <svg viewBox="0 0 40 80" fill="none">
-                                <path d="M10 0 C 10 0, 0 30, 20 80 C 40 30, 30 0, 30 0 Z" fill="#FF9D00" />
-                                <path d="M15 0 C 15 0, 10 20, 20 50 C 30 20, 25 0, 25 0 Z" fill="#FFD700" />
-                            </svg>
-                        </motion.div>
                         
                         {/* Exhaust particles */}
                         <motion.div animate={{ y: [0, 40], opacity: [1, 0] }} transition={{ duration: 0.6, repeat: Infinity, delay: 0 }} className="absolute top-[100px] left-[50px] w-2 h-2 rounded-full bg-gray-300" />

@@ -23,7 +23,7 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => {
                         <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
                             <i className="fab fa-facebook-f" />
                         </a>
-                        <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+                        <a href="https://youtube.com/@mnkvisualhouse?si=2KeWpDXaQaCyjWm4" target="_blank" rel="noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
                             <i className="fab fa-youtube" />
                         </a>
                     </div>
