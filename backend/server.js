@@ -7,7 +7,7 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const OWNER_EMAIL = process.env.RECIPIENT_EMAIL || process.env.EMAIL_USER;
+const OWNER_EMAIL = process.env.RECIPIENT_EMAIL || 'hellomnkvisualhouse@gmail.com';
 
 app.use(cors());
 app.use(express.json());
@@ -77,11 +77,6 @@ app.post('/api/contact', async (req, res) => {
         return res.status(500).json({ success: false, message: "Email service not configured." });
     }
 
-    if (!OWNER_EMAIL) {
-        console.error("Missing RECIPIENT_EMAIL environment variable.");
-        return res.status(500).json({ success: false, message: "Recipient email not configured." });
-    }
-
     try {
         console.log("Contact Form Submission:", { name, email, phone, service, message });
 
@@ -93,31 +88,37 @@ app.post('/api/contact', async (req, res) => {
             replyTo: email,
             subject: `New Lead: ${service || 'Website'} Inquiry from ${name}`,
             html: `
-                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 10px;">
-                    <h2 style="color: #7B2FF7; border-bottom: 2px solid #E91E8C; padding-bottom: 10px;">New Website Inquiry</h2>
-                    <p><strong>Name:</strong> ${escapeHtml(name)}</p>
-                    <p><strong>Email:</strong> ${escapeHtml(email)}</p>
-                    <p><strong>Phone:</strong> ${escapeHtml(phone || 'Not provided')}</p>
-                    <p><strong>Interested Service:</strong> ${escapeHtml(service || 'Not specified')}</p>
-                    <br/>
-                    <p><strong>Message:</strong></p>
-                    <p style="background:#f9fafb; padding:12px; border-radius:6px; border-left:4px solid #7B2FF7;">${escapeHtml(message).replace(/\n/g, '<br/>')}</p>
-                    <hr style="margin-top:20px; border-color:#e5e7eb;"/>
-                    <p style="color:#9ca3af; font-size:12px;">This email was sent from the MNK Visual House website contact form.</p>
+                <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e5e7eb; border-radius: 12px;">
+                    <h2 style="color: #7B2FF7; border-bottom: 2px solid #E91E8C; padding-bottom: 10px; margin-top: 0;">
+                        📬 New Website Inquiry — MNK Visual House
+                    </h2>
+                    <table style="width:100%; border-collapse: collapse;">
+                        <tr><td style="padding: 8px 0; color: #6b7280; font-weight: bold; width: 130px;">Name</td><td style="padding: 8px 0;">${escapeHtml(name)}</td></tr>
+                        <tr><td style="padding: 8px 0; color: #6b7280; font-weight: bold;">Email</td><td style="padding: 8px 0;"><a href="mailto:${escapeHtml(email)}" style="color:#7B2FF7;">${escapeHtml(email)}</a></td></tr>
+                        <tr><td style="padding: 8px 0; color: #6b7280; font-weight: bold;">Phone</td><td style="padding: 8px 0;">${escapeHtml(phone || 'Not provided')}</td></tr>
+                        <tr><td style="padding: 8px 0; color: #6b7280; font-weight: bold;">Service</td><td style="padding: 8px 0;">${escapeHtml(service || 'Not specified')}</td></tr>
+                    </table>
+                    <div style="margin-top: 16px; background: #f9fafb; padding: 16px; border-radius: 8px; border-left: 4px solid #7B2FF7;">
+                        <p style="margin: 0; color: #6b7280; font-weight: bold; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;">Message</p>
+                        <p style="margin: 8px 0 0; color: #1A1A2E;">${escapeHtml(message).replace(/\n/g, '<br/>')}</p>
+                    </div>
+                    <p style="margin-top: 20px; color: #9ca3af; font-size: 12px; border-top: 1px solid #e5e7eb; padding-top: 12px;">
+                        Sent from MNK Visual House website contact form. Reply directly to this email to respond to the inquiry.
+                    </p>
                 </div>
             `
         });
 
         if (error) {
-            console.error("Resend API Error:", error);
+            console.error("Resend API Error:", JSON.stringify(error));
             return res.status(500).json({ success: false, message: "Failed to send email. Please try again." });
         }
 
-        console.log("Email sent successfully. Resend ID:", data?.id);
+        console.log("✅ Email sent successfully. Resend ID:", data?.id);
         res.json({ success: true, message: "Message sent! We'll be in touch soon." });
 
     } catch (error) {
-        console.error("Unexpected error sending email:", error.message);
+        console.error("Unexpected error:", error.message);
         res.status(500).json({ success: false, message: "Something went wrong. Please try again." });
     }
 });
