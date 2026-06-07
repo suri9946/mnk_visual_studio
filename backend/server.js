@@ -90,7 +90,7 @@ app.post('/api/contact', async (req, res) => {
             html: `
                 <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e5e7eb; border-radius: 12px;">
                     <h2 style="color: #7B2FF7; border-bottom: 2px solid #E91E8C; padding-bottom: 10px; margin-top: 0;">
-                        📬 New Website Inquiry — MNK Visual House
+                        📬 New Enquiry — MNK Visual House
                     </h2>
                     <table style="width:100%; border-collapse: collapse;">
                         <tr><td style="padding: 8px 0; color: #6b7280; font-weight: bold; width: 130px;">Name</td><td style="padding: 8px 0;">${escapeHtml(name)}</td></tr>
