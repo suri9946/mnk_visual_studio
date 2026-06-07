@@ -52,9 +52,28 @@ const CTA = () => {
                         <svg width="40" height="40" viewBox="0 0 24 24" fill="#7B2FF7">
                             <path d="M2 12L22 2L12 22L11 13L2 12Z" />
                         </svg>
-                        {/* Trail */}
-                        <svg className="absolute top-5 left-2 w-12 h-6 text-purple-300 stroke-current stroke-2 fill-none" viewBox="0 0 100 50">
-                            <path strokeDasharray="5,5" d="M100 50 Q 50 50 0 0" />
+                        {/* Kite tail — zero-size SVG with overflow:visible anchored at motion.div origin.
+                             Tail pixel = (2,12) in 24x24 viewBox at 40x40 render = screen (3.3px, 20px).
+                             Path starts M3 20 → exact tail. Downward S-wave matches user's reference drawing. */}
+                        <svg
+                            style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: 0,
+                                height: 0,
+                                overflow: 'visible',
+                                pointerEvents: 'none',
+                            }}
+                        >
+                            <path
+                                d="M3 20 Q -10 36 3 52 Q 16 68 1 84"
+                                stroke="#3B0764"
+                                strokeWidth="2.8"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                fill="none"
+                            />
                         </svg>
                     </motion.div>
 
