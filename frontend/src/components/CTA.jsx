@@ -37,8 +37,8 @@ const CTA = () => {
                     {/* Paper plane animation */}
                     <motion.div
                         animate={{ 
-                            x: [0, 200, 400], 
-                            y: [0, -50, -100],
+                            x: [0, 60, 120], 
+                            y: [0, -40, -80],
                             opacity: [1, 1, 0]
                         }}
                         transition={{ 
@@ -53,14 +53,14 @@ const CTA = () => {
                             <path d="M2 12L22 2L12 22L11 13L2 12Z" />
                         </svg>
                         {/* Trail */}
-                        <svg className="absolute top-6 -left-10 w-16 h-8 text-purple-300 stroke-current stroke-2 fill-none" viewBox="0 0 100 50">
-                            <path strokeDasharray="5,5" d="M0 50 Q 50 50 100 0" />
+                        <svg className="absolute top-5 left-2 w-12 h-6 text-purple-300 stroke-current stroke-2 fill-none" viewBox="0 0 100 50">
+                            <path strokeDasharray="5,5" d="M100 50 Q 50 50 0 0" />
                         </svg>
                     </motion.div>
 
                     {/* Characters SVG */}
-                    <div className="relative z-10 mt-auto">
-                        <svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div className="relative z-10 mt-auto w-full">
+                        <svg width="100%" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ maxWidth: '400px', margin: '0 auto', display: 'block' }}>
                             {/* Woman */}
                             <path d="M50 300 C 50 250, 70 200, 100 200 C 130 200, 150 250, 150 300 Z" fill="#E91E8C" />
                             {/* Woman Head */}

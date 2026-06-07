@@ -122,13 +122,13 @@ const Hero = () => {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.2, duration: 0.5 }}
-                    className="relative flex items-center justify-center"
+                    className="relative flex items-center justify-center w-full px-8 sm:px-6 lg:px-0"
                 >
                     {/* Monitor Frame */}
-                    <div className="relative w-full max-w-[550px] aspect-[16/10] bg-white rounded-t-2xl border-[8px] border-gray-800 shadow-premium flex flex-col overflow-hidden">
+                    <div className="relative w-full max-w-[480px] aspect-[16/10] bg-white rounded-t-2xl border-[8px] border-gray-800 shadow-premium flex flex-col overflow-hidden">
                         
                         {/* Monitor Content Area */}
-                        <div className="flex-1 relative bg-gray-50 p-6 overflow-hidden">
+                        <div className="flex-1 relative bg-gray-50 p-3 sm:p-6 overflow-hidden">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={currentSlide}
@@ -136,28 +136,28 @@ const Hero = () => {
                                     animate={{ opacity: 1, x: 0 }}
                                     exit={{ opacity: 0, x: -20 }}
                                     transition={{ duration: 0.3 }}
-                                    className={`absolute inset-4 rounded-xl ${slides[currentSlide].bg} border border-white flex flex-col items-center justify-center text-center p-6 shadow-sm`}
+                                    className={`absolute inset-2 sm:inset-4 rounded-xl ${slides[currentSlide].bg} border border-white flex flex-col items-center justify-center text-center p-3 sm:p-6 shadow-sm`}
                                 >
-                                    <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-4">
+                                    <div className="w-10 h-10 sm:w-16 sm:h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-2 sm:mb-4">
                                         {slides[currentSlide].icon}
                                     </div>
-                                    <h3 className="text-xl font-bold text-dark mb-2">
+                                    <h3 className="text-sm sm:text-xl font-bold text-dark mb-1 sm:mb-2">
                                         {slides[currentSlide].title}
                                     </h3>
                                     
-                                    <div className="flex gap-4 mt-4 w-full">
-                                        <div className="flex-1 bg-white p-3 rounded-lg shadow-sm border border-gray-100">
-                                            <p className="text-xs text-gray-500 font-semibold mb-1 uppercase">Metric</p>
-                                            <p className="font-bold text-sm text-dark">{slides[currentSlide].stat}</p>
+                                    <div className="flex gap-2 sm:gap-4 mt-2 sm:mt-4 w-full">
+                                        <div className="flex-1 bg-white p-2 sm:p-3 rounded-lg shadow-sm border border-gray-100">
+                                            <p className="text-[9px] sm:text-xs text-gray-500 font-semibold mb-0.5 sm:mb-1 uppercase">Metric</p>
+                                            <p className="font-bold text-[10px] sm:text-sm text-dark">{slides[currentSlide].stat}</p>
                                         </div>
-                                        <div className="flex-1 bg-white p-3 rounded-lg shadow-sm border border-gray-100">
-                                            <p className="text-xs text-gray-500 font-semibold mb-1 uppercase">Growth</p>
-                                            <p className="font-bold text-sm text-green-500">{slides[currentSlide].growth}</p>
+                                        <div className="flex-1 bg-white p-2 sm:p-3 rounded-lg shadow-sm border border-gray-100">
+                                            <p className="text-[9px] sm:text-xs text-gray-500 font-semibold mb-0.5 sm:mb-1 uppercase">Growth</p>
+                                            <p className="font-bold text-[10px] sm:text-sm text-green-500">{slides[currentSlide].growth}</p>
                                         </div>
                                     </div>
                                     
                                     {/* Mock chart graph SVG */}
-                                    <svg className="w-full h-16 mt-6" viewBox="0 0 200 50" preserveAspectRatio="none">
+                                    <svg className="w-full h-10 sm:h-16 mt-3 sm:mt-6" viewBox="0 0 200 50" preserveAspectRatio="none">
                                         <motion.path
                                             initial={{ pathLength: 0, opacity: 0 }}
                                             animate={{ pathLength: 1, opacity: 1 }}
@@ -179,23 +179,23 @@ const Hero = () => {
                         </div>
 
                         {/* Monitor Bottom Bezel */}
-                        <div className="h-6 bg-gray-900 w-full flex items-center justify-center relative">
+                        <div className="h-5 sm:h-6 bg-gray-900 w-full flex items-center justify-center relative">
                             <div className="w-1.5 h-1.5 rounded-full bg-gray-700" />
                             <div className="absolute right-4 w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.8)]" />
                         </div>
                     </div>
                     
                     {/* Monitor Stand */}
-                    <div className="absolute -bottom-6 w-32 h-6 bg-gray-300 rounded-b-xl" style={{ perspective: '100px' }}>
+                    <div className="absolute -bottom-6 w-24 sm:w-32 h-6 bg-gray-300 rounded-b-xl" style={{ perspective: '100px' }}>
                         <div className="w-full h-full bg-gray-800" style={{ transform: 'rotateX(20deg)' }} />
                     </div>
-                    <div className="absolute -bottom-8 w-48 h-2 bg-gray-900 rounded-full" />
+                    <div className="absolute -bottom-8 w-36 sm:w-48 h-2 bg-gray-900 rounded-full" />
                     
-                    {/* Floating elements around monitor */}
+                    {/* Floating elements around monitor - constrained so they don't overflow on mobile */}
                     <motion.div
                         animate={{ y: [-10, 10, -10] }}
                         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute -top-6 -right-6 bg-white p-3 rounded-xl shadow-premium border border-gray-100 flex items-center gap-2 z-20"
+                        className="absolute top-0 right-0 sm:-top-6 sm:-right-6 bg-white p-2 sm:p-3 rounded-xl shadow-premium border border-gray-100 flex items-center gap-2 z-20 scale-75 sm:scale-100 origin-top-right"
                     >
                         <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
                             <span className="text-green-600 font-bold text-xs">✓</span>
@@ -209,7 +209,7 @@ const Hero = () => {
                     <motion.div
                         animate={{ y: [10, -10, 10] }}
                         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute -bottom-2 -left-6 bg-white p-3 rounded-xl shadow-premium border border-gray-100 flex items-center gap-2 z-20"
+                        className="absolute bottom-6 left-0 sm:-bottom-2 sm:-left-6 bg-white p-2 sm:p-3 rounded-xl shadow-premium border border-gray-100 flex items-center gap-2 z-20 scale-75 sm:scale-100 origin-bottom-left"
                     >
                         <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
                             <i className="fab fa-facebook-f text-xs" />
