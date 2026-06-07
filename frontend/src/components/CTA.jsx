@@ -52,24 +52,25 @@ const CTA = () => {
                         <svg width="40" height="40" viewBox="0 0 24 24" fill="#7B2FF7">
                             <path d="M2 12L22 2L12 22L11 13L2 12Z" />
                         </svg>
-                        {/* Kite tail — trails LEFT behind the plane (plane flies upper-right, tail goes lower-left).
-                             Plane tail vertex (2,12) in 24x24 @ 40x40 = screen (3px, 20px).
-                             SVG top:12 left:-65 width:68 → path end (68,8) = screen (-65+68=3, 12+8=20) ✅
-                             All points within 68×20 viewBox → no overflow → no clipping. */}
+                        {/* Kite tail — diagonal LOWER-LEFT trail matching user's red reference line.
+                             Plane flies upper-right → trail goes opposite = lower-left diagonal.
+                             SVG: top:0 left:-70 width:73 height:100
+                             Path end (73,20) = screen (-70+73=3, 0+20=20) = plane tail ✅
+                             Arcs diagonally to lower-left → all points within bounds, no clipping. */}
                         <svg
                             style={{
                                 position: 'absolute',
-                                top: '12px',
-                                left: '-65px',
-                                width: '68px',
-                                height: '20px',
+                                top: '0px',
+                                left: '-70px',
+                                width: '73px',
+                                height: '100px',
                                 pointerEvents: 'none',
                             }}
-                            viewBox="0 0 68 20"
+                            viewBox="0 0 73 100"
                             fill="none"
                         >
                             <path
-                                d="M68 8 Q 52 2 36 10 Q 20 18 0 14"
+                                d="M73 20 Q 50 35 28 60 Q 10 78 0 95"
                                 stroke="#3B0764"
                                 strokeWidth="2.8"
                                 strokeLinecap="round"
