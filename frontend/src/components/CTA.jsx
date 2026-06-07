@@ -52,9 +52,9 @@ const CTA = () => {
                         <svg width="40" height="40" viewBox="0 0 24 24" fill="#7B2FF7">
                             <path d="M2 12L22 2L12 22L11 13L2 12Z" />
                         </svg>
-                        {/* Kite tail — zero-size SVG with overflow:visible anchored at motion.div origin.
-                             Tail pixel = (2,12) in 24x24 viewBox at 40x40 render = screen (3.3px, 20px).
-                             Path starts M3 20 → exact tail. Downward S-wave matches user's reference drawing. */}
+                        {/* Kite tail — anchored to bottom vertex (12,22) of the plane in 24x24 viewBox.
+                             Screen coords: 12×(40/24)=20px, 22×(40/24)=36.7px → M20 37.
+                             Same S-wave shape, just shifted to plane's back-bottom tip as user drew. */}
                         <svg
                             style={{
                                 position: 'absolute',
@@ -67,7 +67,7 @@ const CTA = () => {
                             }}
                         >
                             <path
-                                d="M3 20 Q -10 36 3 52 Q 16 68 1 84"
+                                d="M20 37 Q 7 53 20 69 Q 33 85 18 101"
                                 stroke="#3B0764"
                                 strokeWidth="2.8"
                                 strokeLinecap="round"
