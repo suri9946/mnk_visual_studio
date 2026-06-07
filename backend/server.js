@@ -121,7 +121,14 @@ app.post('/api/contact', async (req, res) => {
 
         res.json({ success: true, message: "Message sent! We'll be in touch." });
     } catch (error) {
-        console.error("Error sending email:", error);
+        console.error("❌ Email Error Details:");
+        console.error("  - Message:", error.message);
+        console.error("  - Code:", error.code);
+        console.error("  - Command:", error.command);
+        console.error("  - Full Error:", error);
+        console.error("  - EMAIL_USER:", process.env.EMAIL_USER);
+        console.error("  - EMAIL_PASS length:", EMAIL_PASS.length);
+        console.error("  - EMAIL_PASS (first 5 chars):", EMAIL_PASS.substring(0, 5));
         res.status(500).json({ success: false, message: "Something went wrong. Please check your email configuration." });
     }
 });
