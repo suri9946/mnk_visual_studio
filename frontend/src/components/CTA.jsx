@@ -52,22 +52,24 @@ const CTA = () => {
                         <svg width="40" height="40" viewBox="0 0 24 24" fill="#7B2FF7">
                             <path d="M2 12L22 2L12 22L11 13L2 12Z" />
                         </svg>
-                        {/* Kite tail — anchored to bottom vertex (12,22) of the plane in 24x24 viewBox.
-                             Screen coords: 12×(40/24)=20px, 22×(40/24)=36.7px → M20 37.
-                             Same S-wave shape, just shifted to plane's back-bottom tip as user drew. */}
+                        {/* Kite tail — explicit-sized SVG avoids overflow-hidden clipping from section.
+                             Plane bottom vertex (12,22) in 24x24 viewBox at 40x40 = screen (20px, 37px).
+                             SVG at top:37 left:7 → path start (13,0) = screen (7+13=20, 37+0=37) ✅
+                             All path points inside 26×70 bounds → no overflow → no clipping. */}
                         <svg
                             style={{
                                 position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                width: 0,
-                                height: 0,
-                                overflow: 'visible',
+                                top: '37px',
+                                left: '7px',
+                                width: '26px',
+                                height: '70px',
                                 pointerEvents: 'none',
                             }}
+                            viewBox="0 0 26 70"
+                            fill="none"
                         >
                             <path
-                                d="M20 37 Q 7 53 20 69 Q 33 85 18 101"
+                                d="M13 0 Q 0 17 13 34 Q 26 51 11 68"
                                 stroke="#3B0764"
                                 strokeWidth="2.8"
                                 strokeLinecap="round"
