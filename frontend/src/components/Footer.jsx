@@ -67,6 +67,17 @@ const Footer = ({ onPrivacyClick, onTermsClick }) => {
                             </a>
                         </li>
                     </ul>
+
+                    {/* Powered by CosmoCoders */}
+                    <div className="mt-6 pt-4 border-t border-white/10">
+                        <p className="text-xs text-gray-500">Powered by</p>
+                        <a
+                            href="mailto:askcosmocoders@gmail.com"
+                            className="text-sm font-semibold text-gray-400 hover:text-primary transition-colors duration-200 cursor-pointer mt-1 inline-block"
+                        >
+                            CosmoCoders
+                        </a>
+                    </div>
                 </div>
 
             </div>
