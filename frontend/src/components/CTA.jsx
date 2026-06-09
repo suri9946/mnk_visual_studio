@@ -7,7 +7,6 @@ const CTA = () => {
         <section className="py-20 px-6 md:px-12 lg:px-24 bg-[#F8F9FE] relative overflow-hidden">
             {/* Background elements */}
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-                <div className="absolute top-10 right-10 w-6 h-6 rounded-full border-2 border-purple-200" />
                 <div className="absolute bottom-20 left-10 w-4 h-4 rounded-full bg-pink-200" />
                 <div className="absolute top-1/2 left-20 w-3 h-3 rounded-full bg-blue-200" />
             </div>
@@ -34,47 +33,59 @@ const CTA = () => {
                 {/* Right - High Fiving Characters Animation */}
                 <div className="w-full lg:w-1/2 relative h-[400px] flex items-end justify-center">
                     
-                    {/* Paper plane animation */}
+                    {/* Paper plane — starts left-edge mid-height, gentle upward slope to top-right */}
                     <motion.div
-                        animate={{ 
-                            x: [0, 60, 120], 
-                            y: [0, -40, -80],
-                            opacity: [1, 1, 0]
+                        style={{ position: 'absolute', top: '48%', left: '0px', zIndex: 20 }}
+                        animate={{
+                            x: [0, 90, 200, 350, 510],
+                            y: [0, -28, -65, -120, -218],
+                            opacity: [0, 1, 1, 1, 0],
                         }}
-                        transition={{ 
-                            duration: 3, 
+                        transition={{
+                            duration: 5,
                             repeat: Infinity,
-                            repeatDelay: 1,
-                            ease: "easeOut" 
+                            repeatDelay: 2,
+                            ease: 'easeInOut',
+                            times: [0, 0.08, 0.4, 0.85, 1],
                         }}
-                        className="absolute top-20 left-1/4 z-20"
                     >
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#7B2FF7">
-                            <path d="M2 12L22 2L12 22L11 13L2 12Z" />
+                        {/* Paper Airplane — rotated ~-19° to match the flat yellow-line slope */}
+                        <svg
+                            width="34"
+                            height="34"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            style={{ transform: 'rotate(-19deg)', display: 'block' }}
+                        >
+                            <path
+                                d="M2 3L22 12L2 21V14L16 12L2 10V3Z"
+                                fill="#7C3AED"
+                                stroke="#5B21B6"
+                                strokeWidth="0.5"
+                                strokeLinejoin="round"
+                            />
                         </svg>
-                        {/* Kite tail — diagonal LOWER-LEFT trail matching user's red reference line.
-                             Plane flies upper-right → trail goes opposite = lower-left diagonal.
-                             SVG: top:0 left:-70 width:73 height:100
-                             Path end (73,20) = screen (-70+73=3, 0+20=20) = plane tail ✅
-                             Arcs diagonally to lower-left → all points within bounds, no clipping. */}
+
+                        {/* Dashed trail — flat-ish angle matching ~-19° slope */}
                         <svg
                             style={{
                                 position: 'absolute',
-                                top: '0px',
-                                left: '-70px',
-                                width: '73px',
-                                height: '100px',
+                                top: '10px',
+                                left: '-90px',
+                                width: '94px',
+                                height: '38px',
                                 pointerEvents: 'none',
                             }}
-                            viewBox="0 0 73 100"
+                            viewBox="0 0 94 38"
                             fill="none"
                         >
                             <path
-                                d="M73 20 Q 50 35 28 60 Q 10 78 0 95"
-                                stroke="#3B0764"
-                                strokeWidth="2.8"
+                                d="M94 8 Q 70 14 46 22 Q 23 29 0 34"
+                                stroke="#7C3AED"
+                                strokeWidth="2"
                                 strokeLinecap="round"
-                                strokeLinejoin="round"
+                                strokeDasharray="5 7"
                                 fill="none"
                             />
                         </svg>
@@ -82,45 +93,46 @@ const CTA = () => {
 
                     {/* Characters SVG */}
                     <div className="relative z-10 mt-auto w-full">
-                        <svg width="100%" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ maxWidth: '400px', margin: '0 auto', display: 'block' }}>
-                            {/* Woman */}
-                            <path d="M50 300 C 50 250, 70 200, 100 200 C 130 200, 150 250, 150 300 Z" fill="#E91E8C" />
+                        <svg width="100%" viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ maxWidth: '440px', margin: '0 auto', display: 'block' }}>
+                            {/* Woman body — larger & fuller */}
+                            <path d="M30 320 C 30 255, 55 195, 95 195 C 135 195, 158 255, 158 320 Z" fill="#E91E8C" />
                             {/* Woman Head */}
-                            <circle cx="100" cy="170" r="30" fill="#FFCDB2" />
+                            <circle cx="95" cy="162" r="33" fill="#FFCDB2" />
                             {/* Woman Hair */}
-                            <path d="M70 170 C 70 140, 130 140, 130 170 L 130 200 L 70 200 Z" fill="#1A1A2E" />
+                            <path d="M62 162 C 62 128, 128 128, 128 162 L 128 195 L 62 195 Z" fill="#1A1A2E" />
                             
-                            {/* Man */}
-                            <path d="M250 300 C 250 220, 290 180, 330 180 C 370 180, 390 220, 390 300 Z" fill="#FBB03B" />
+                            {/* Man body — larger & fuller */}
+                            <path d="M242 320 C 242 230, 282 175, 325 175 C 368 175, 400 230, 400 320 Z" fill="#FBB03B" />
                             {/* Man Head */}
-                            <circle cx="330" cy="140" r="35" fill="#FFCDB2" />
-                            {/* Man Hair/Beard */}
-                            <path d="M295 140 C 295 100, 365 100, 365 140 Z" fill="#1A1A2E" />
-                            <path d="M310 160 Q 330 180 350 160" stroke="#1A1A2E" strokeWidth="6" strokeLinecap="round" />
+                            <circle cx="325" cy="132" r="38" fill="#FFCDB2" />
+                            {/* Man Hair */}
+                            <path d="M287 132 C 287 90, 363 90, 363 132 Z" fill="#1A1A2E" />
+                            {/* Man Smile */}
+                            <path d="M308 152 Q 325 172 342 152" stroke="#1A1A2E" strokeWidth="6" strokeLinecap="round" fill="none" />
 
                             {/* Middle Kid */}
-                            <path d="M150 300 C 150 260, 180 230, 210 230 C 240 230, 260 260, 260 300 Z" fill="#7B2FF7" />
+                            <path d="M148 320 C 148 272, 178 238, 210 238 C 242 238, 268 272, 268 320 Z" fill="#7B2FF7" />
                             {/* Kid Head */}
-                            <circle cx="210" cy="200" r="25" fill="#FFCDB2" />
+                            <circle cx="210" cy="208" r="28" fill="#FFCDB2" />
                             {/* Kid Hair */}
-                            <path d="M185 200 C 185 170, 235 170, 235 200 Z" fill="#1A1A2E" />
+                            <path d="M182 208 C 182 176, 238 176, 238 208 Z" fill="#1A1A2E" />
 
                             {/* Woman Arm high fiving */}
-                            <path d="M130 220 Q 180 180 220 100" stroke="#E91E8C" strokeWidth="20" strokeLinecap="round" />
+                            <path d="M128 210 Q 178 168 218 92" stroke="#E91E8C" strokeWidth="22" strokeLinecap="round" />
                             {/* Woman Hand */}
-                            <circle cx="220" cy="100" r="12" fill="#FFCDB2" />
+                            <circle cx="218" cy="92" r="14" fill="#FFCDB2" />
                             
                             {/* Man Arm high fiving */}
-                            <path d="M300 200 Q 250 160 220 100" stroke="#FBB03B" strokeWidth="20" strokeLinecap="round" />
+                            <path d="M295 195 Q 252 155 218 92" stroke="#FBB03B" strokeWidth="22" strokeLinecap="round" />
                             {/* Man Hand */}
-                            <circle cx="220" cy="100" r="12" fill="#FFCDB2" />
+                            <circle cx="218" cy="92" r="14" fill="#FFCDB2" />
 
-                            {/* High Five Impact Lines */}
+                            {/* High Five Impact Lines — subtle cream/gold */}
                             <motion.path 
-                                animate={{ opacity: [0, 1, 0], scale: [0.8, 1.2, 0.8] }}
-                                transition={{ duration: 1, repeat: Infinity }}
-                                d="M220 70 L 220 50 M 240 80 L 260 70 M 190 80 L 170 70" 
-                                stroke="#FF9D00" strokeWidth="4" strokeLinecap="round" 
+                                animate={{ opacity: [0, 0.8, 0], scale: [0.8, 1.2, 0.8] }}
+                                transition={{ duration: 1.2, repeat: Infinity }}
+                                d="M218 62 L 218 42 M 242 74 L 264 62 M 194 74 L 172 62" 
+                                stroke="#F5E6C8" strokeWidth="4" strokeLinecap="round" 
                             />
                         </svg>
                     </div>
